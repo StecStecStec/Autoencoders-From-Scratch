@@ -62,3 +62,6 @@ Weights for the MetroPT3 model are saved in the weights/ folder with version suf
 - The MetroPT3 dataset contains telemetry from an air compressor; failure intervals are hardcoded based on domain knowledge.
 - For VQ‑VAE, the codebook is updated during training using a simple vector quantization loss.
 - Conditional VAE concatenates one‑hot labels to both encoder input and decoder input.
+
+## Author
+Michał Kryspin Stec
