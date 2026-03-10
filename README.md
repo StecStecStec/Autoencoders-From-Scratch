@@ -31,7 +31,7 @@ Install with:
 ```bash
 pip install numpy matplotlib pandas scikit-learn
 ```
-## Usage
+# Usage
 ## MNIST Demo
 Run main.py to train all models or load pre‑trained weights (set the corresponding train_* flags). After training/evaluation, it displays:
 
