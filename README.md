@@ -2,6 +2,9 @@
 
 This repository implements several autoencoder-based models for unsupervised anomaly detection, with a focus on variational and vector‑quantized architectures. It includes training on MNIST for demonstration and application to the **MetroPT3 (Air Compressor) dataset** for predictive maintenance.
 
+## Important Notice
+To utilize the full functionality, it is best to download the dataset directly from: https://www.kaggle.com/datasets/joebeachcapital/metropt-3-dataset?resource=download as the file was to big to upload (even if compressed)
+
 ## Implemented Models
 
 - **AutoEncoder (AE)** – standard feedforward autoencoder.
