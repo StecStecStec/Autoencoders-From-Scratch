@@ -1,106 +1,60 @@
-# Anomaly Detection and Generative Models for MNIST and Industrial Data
+# VarEnc: Variational Autoencoders for Anomaly Detection
 
-This repository contains implementations of various neural network architectures for generative modeling and anomaly detection, including AutoEncoders (AE), Variational AutoEncoders (VAE), Conditional Variational AutoEncoders (CVAE), and Vector Quantized Variational AutoEncoders (VQVAE). It provides tools for evaluating these models on MNIST and industrial time-series datasets, such as MetroPT3 air compressor sensor data.
+This repository implements several autoencoder-based models for unsupervised anomaly detection, with a focus on variational and vector‑quantized architectures. It includes training on MNIST for demonstration and application to the **MetroPT3 (Air Compressor) dataset** for predictive maintenance.
 
----
+## Implemented Models
 
-## Features
+- **AutoEncoder (AE)** – standard feedforward autoencoder.
+- **Variational AutoEncoder (VAE)** – learns a probabilistic latent space.
+- **Conditional Variational AutoEncoder (CVAE)** – conditions on class labels.
+- **Vector‑Quantized Variational AutoEncoder (VQ‑VAE)** – discrete latent representations via a codebook.
 
-### Generative Models
-* **AutoEncoder (AE):** Basic feedforward autoencoder for dimensionality reduction and reconstruction.
-* **Variational AutoEncoder (VAE):** Probabilistic encoder-decoder model for generating latent representations and smooth transitions.
-* **Conditional VAE (CVAE):** Extends VAE to generate data conditioned on specific class labels.
-* **Vector Quantized VAE (VQVAE):** Discrete latent space with codebook entries for improved reconstruction and anomaly detection.
+All models are built from scratch using NumPy (no deep learning framework).
 
-### Anomaly Detection
-* Evaluate sensor data with reconstruction-based anomaly scoring.
-* Identify failures in industrial datasets using MSE (Mean Squared Error) on reconstructed windows.
-* Visualizations for:
-    * Reconstruction vs. original signals
-    * Latent codebook usage over time
-    * Smoothed anomaly trends
-    * Feature-wise reconstruction comparison
+## Project Structure
 
----
+- `fnn.py` – core classes: `FNN` (flexible feedforward network), `AutoEncoder`, `VariationalAutoEncoder`, `ConditionalVariationalAutoEncoder`, `VQVAE`.  
+- `main.py` – trains/evaluates all models on MNIST, saves/loads weights, and generates reconstruction/transition plots.  
+- `metropt-test.py` – trains a VQ‑VAE on the MetroPT3 dataset (analog sensor windows) for anomaly detection.  
+- `metropt-performance-test.py` – evaluates the trained VQ‑VAE on MetroPT3, plots reconstructions, anomaly scores, and codebook usage over time.  
+- `weights/` – directory where trained model weights (`.npy` files) are saved/loaded.
 
-## Repository Structure
+## Dependencies
 
-```text
-.
-├── fnn.py                     # Core model implementations: AE, VAE, CVAE, VQVAE
-├── mnist_training.py           # Scripts for training models on MNIST
-├── industrial_data_analysis.py # Loading and preprocessing MetroPT3 AirCompressor data
-├── evaluation.py               # Functions for evaluating anomaly scores and plotting
-├── weights/                    # Saved weights and codebook entries for models
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
+- Python 3.x
+- NumPy
+- Matplotlib
+- Pandas
+- scikit‑learn
+
+Install with:
+```bash
+pip install numpy matplotlib pandas scikit-learn
 ```
+## Usage
+## MNIST Demo
+Run main.py to train all models or load pre‑trained weights (set the corresponding train_* flags). After training/evaluation, it displays:
 
-## Setup Instructions
-1. Installation
-Clone the repository and install the required dependencies:
+- Reconstructions
+- Latent space interpolations
+- Random samples from the prior
 
-Bash
-```
-git clone <repo-url>
-cd <repo-folder>
-pip install -r requirements.txt
-mkdir weights
-```
+## MetroPT3 Anomaly Detection
+1. Place MetroPT3(AirCompressor).csv in the project folder.
+2. Run metropt-test.py to train a VQ‑VAE on healthy data windows (analog sensors scaled, window size = 60 time steps).
+3. Run metropt-performance-test.py to evaluate the model on failure periods and visualize:
+   - Reconstruction of individual windows
+   - Codebook index migration over time
+   - Smoothed anomaly score trends
+Weights for the MetroPT3 model are saved in the weights/ folder with version suffixes (e.g., v2).
 
--2. Data Preparation
-Download the MNIST dataset via the built-in utility:
+## Key Features
+- Fully NumPy‑based backpropagation with custom gradients.
+- Support for different output activations (sigmoid, tanh, linear, softmax).
+- Modular design – easy to extend with new architectures.
+- Visualization utilities for reconstructions, latent transitions, and anomaly score distributions.
 
-Python
-```
-from fnn import load_mnist_data_np
-(x_train, y_train), (x_test, y_test) = load_mnist_data_np()
-```
-
-For industrial data, ensure the MetroPT3 CSV is present and use the preprocessing script:
-
-Python
-```
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-df = pd.read_csv("MetroPT3(AirCompressor).csv")
-```
-
-# Use industrial_data_analysis.py for scaling and windowing
-Usage Examples
-Training MNIST Models
-Python
-```
-from fnn import AutoEncoder, load_mnist_data_np
-
-(x_train, y_train), (x_test, y_test) = load_mnist_data_np()
-x_train = x_train.reshape(-1, 784, 1) / 255.0
-
-ae = AutoEncoder([784, 256, 64])
-ae.train(x_train, epochs=3, learning_rate=0.001, batch_size=64)
-Evaluating Anomaly Detection
-Python
-from fnn import VQVAE, evaluate_model_performance
-
-model = VQVAE([420, 256, 64], number_of_codebook_entries=64)
-threshold, healthy_scores, failure_scores = evaluate_model_performance(model, X_train, X_test)
-```
-
-Visualization and Analysis
-Python
-```
-from evaluation import plot_railway_reconstruction, plot_codebook_usage_timeline
-
-# Plot original vs reconstructed signal
-plot_railway_reconstruction(model, X_test[0], window_idx=0)
-
-# Plot codebook usage over time
-plot_codebook_usage_timeline(model, X_test)
-```
-
-Technical Notes
-Incremental Training: Models support saving and loading weights from the weights/ directory.
-
-VQVAE Advantage: The VQVAE architecture is specifically optimized for time-series anomaly detection as the discrete codebook effectively maps standard operational states.
-
-Dependencies: Requires Python 3.10+, NumPy, Matplotlib, Pandas, and Scikit-learn.
+## Notes
+- The MetroPT3 dataset contains telemetry from an air compressor; failure intervals are hardcoded based on domain knowledge.
+- For VQ‑VAE, the codebook is updated during training using a simple vector quantization loss.
+- Conditional VAE concatenates one‑hot labels to both encoder input and decoder input.
