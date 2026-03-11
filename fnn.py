@@ -763,11 +763,11 @@ class VQVAE:
             print(
                 f"Epoch {epoch + 1}/{epochs} - Avg Recon Loss: {avg_recon:.4f}, Avg Codebook Loss: {avg_codebook:.4f}, Avg Commit Loss: {avg_commit:.4f}, Avg Total Loss: {avg_total:.4f}")
 
-        np.save("weights/vqvae_encoder_weights_v2.npy", np.array(self.encoder.weights, dtype=object))
-        np.save("weights/vqvae_encoder_biases_v2.npy", np.array(self.encoder.biases, dtype=object))
-        np.save("weights/vqvae_decoder_weights_v2.npy", np.array(self.decoder.weights, dtype=object))
-        np.save("weights/vqvae_decoder_biases_v2.npy", np.array(self.decoder.biases, dtype=object))
-        np.save("weights/vqvae_codebook_v2.npy", np.array(self.codebook_entries, dtype=object))
+        np.save("weights/vqvae_encoder_weights.npy", np.array(self.encoder.weights, dtype=object))
+        np.save("weights/vqvae_encoder_biases.npy", np.array(self.encoder.biases, dtype=object))
+        np.save("weights/vqvae_decoder_weights.npy", np.array(self.decoder.weights, dtype=object))
+        np.save("weights/vqvae_decoder_biases.npy", np.array(self.decoder.biases, dtype=object))
+        np.save("weights/vqvae_codebook.npy", np.array(self.codebook_entries, dtype=object))
 
     def show_reconstrutions(self, nr_of_examples, mnist_data):
         fig, axes = plt.subplots(2, nr_of_examples, figsize=(15, 6))

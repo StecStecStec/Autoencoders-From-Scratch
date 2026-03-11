@@ -4,7 +4,7 @@ from fnn import load_mnist_data_np, AutoEncoder, VariationalAutoEncoder, Conditi
 train_auto_enc = False
 train_var_enc = False
 train_cond_var_enc = False
-train_vq_vae = True
+train_vq_vae = False
 
 ae_shape = np.array([784, 256, 64])
 vae_shape = np.array([784, 256, 128])
@@ -77,11 +77,11 @@ if train_vq_vae:
 
     vqvae.train(x_train,  epochs=epochs, learning_rate=learning_rate, beta=0.25, batch_size=batch_size)
 else:
-    enc_w = list(np.load("weights/vqvae_encoder_weights_v1.npy", allow_pickle=True))
-    enc_b = list(np.load("weights/vqvae_encoder_biases_v1.npy", allow_pickle=True))
-    dec_w = list(np.load("weights/vqvae_decoder_weights_v1.npy", allow_pickle=True))
-    dec_b = list(np.load("weights/vqvae_decoder_biases_v1.npy", allow_pickle=True))
-    loaded_codebook = list(np.load("weights/vqvae_codebook_v1.npy", allow_pickle=True))
+    enc_w = list(np.load("weights/vqvae_encoder_weights.npy", allow_pickle=True))
+    enc_b = list(np.load("weights/vqvae_encoder_biases.npy", allow_pickle=True))
+    dec_w = list(np.load("weights/vqvae_decoder_weights.npy", allow_pickle=True))
+    dec_b = list(np.load("weights/vqvae_decoder_biases.npy", allow_pickle=True))
+    loaded_codebook = list(np.load("weights/vqvae_codebook.npy", allow_pickle=True))
 
     vqvae = VQVAE(vqvae_shape, nr_of_codebook_entries,  enc_w, enc_b, dec_w, dec_b, loaded_codebook)
 
