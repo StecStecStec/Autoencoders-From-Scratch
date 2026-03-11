@@ -63,5 +63,8 @@ Weights for the MetroPT3 model are saved in the weights/ folder with version suf
 - For VQ‑VAE, the codebook is updated during training using a simple vector quantization loss.
 - Conditional VAE concatenates one‑hot labels to both encoder input and decoder input.
 
+## Examples
+
+
 ### Author
 Michał Kryspin Stec
