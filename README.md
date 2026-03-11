@@ -65,41 +65,28 @@ Weights for the MetroPT3 model are saved in the weights/ folder with version suf
 
 ## Examples
 
-### AutoEncoder (AE)
+### Reconstructions
 
-**Reconstruction**
-![AE Reconstruction](images/AE_reconstruction.png)
+| AutoEncoder (AE) | Variational AutoEncoder (VAE) | Conditional VAE (CVAE) | VQ-VAE |
+|---|---|---|---|
+| <img src="images/AE_reconstruction.png" width="220"> | <img src="images/VAE_reconstruction.png" width="220"> | <img src="images/CVAE_reconstruction.png" width="220"> | <img src="images/VQ-VAE_reconstruction.png" width="220"> |
 
-**Latent Sampling**
-![AE Latent Sampling](images/AE_latent_sampling.png)
+---
 
-**Latent Transition**
-![AE Transition](images/AE_transition.png)
+### Latent Space Transitions  
+Interpolation between two points in latent space.
 
+| AutoEncoder (AE) | Variational AutoEncoder (VAE) |
+|---|---|
+| <img src="images/AE_transition.png" width="260"> | <img src="images/VAE_transition.png" width="260"> |
 
-### Variational AutoEncoder (VAE)
+---
 
-**Reconstruction**
-![VAE Reconstruction](images/VAE_reconstruction.png)
+### Sampling from Latent Space
 
-**Latent Sampling**
-![VAE Latent Sampling](images/VAE_latent_sampling.png)
-
-**Latent Transition**
-![VAE Transition](images/VAE_transition.png)
-
-
-### Conditional Variational AutoEncoder (CVAE)
-
-**Reconstruction**
-![CVAE Reconstruction](images/CVAE_reconstruction.png)
-
-
-### Vector-Quantized Variational AutoEncoder (VQ-VAE)
-
-**Reconstruction**
-![VQ-VAE Reconstruction](images/VQ-VAE_reconstruction.png)
-
+| AutoEncoder (AE) | Variational AutoEncoder (VAE) |
+|---|---|
+| <img src="images/AE_latent_sampling.png" width="260"> | <img src="images/VAE_latent_sampling.png" width="260"> |
 
 ### Author
 Michał Kryspin Stec
