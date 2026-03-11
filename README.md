@@ -65,6 +65,41 @@ Weights for the MetroPT3 model are saved in the weights/ folder with version suf
 
 ## Examples
 
+### AutoEncoder (AE)
+
+**Reconstruction**
+![AE Reconstruction](images/AE_reconstruction.png)
+
+**Latent Sampling**
+![AE Latent Sampling](images/AE_latent_sampling.png)
+
+**Latent Transition**
+![AE Transition](images/AE_transition.png)
+
+
+### Variational AutoEncoder (VAE)
+
+**Reconstruction**
+![VAE Reconstruction](images/VAE_reconstruction.png)
+
+**Latent Sampling**
+![VAE Latent Sampling](images/VAE_latent_sampling.png)
+
+**Latent Transition**
+![VAE Transition](images/VAE_transition.png)
+
+
+### Conditional Variational AutoEncoder (CVAE)
+
+**Reconstruction**
+![CVAE Reconstruction](images/CVAE_reconstruction.png)
+
+
+### Vector-Quantized Variational AutoEncoder (VQ-VAE)
+
+**Reconstruction**
+![VQ-VAE Reconstruction](images/VQ-VAE_reconstruction.png)
+
 
 ### Author
 Michał Kryspin Stec
